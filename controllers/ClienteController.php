@@ -3,24 +3,27 @@
 namespace Controllers;
 
 use Exception;
-use Model\Producto;
+use Model\Cliente;
 use MVC\Router;
 
-class ProductoController {
+class ClienteController
+{
     public static function datatable(Router $router){
-        $router->render('productos/datatable', []);
+        $router->render('clientes/datatable', []);
     }
-    public static function guardarAPI(){
-        try {
-            $producto = new Producto($_POST);
-            $resultado = $producto->crear();
 
-            if($resultado['resultado'] == 1){
+    public static function guardarAPI()
+    {
+        try {
+            $cliente = new Cliente($_POST);
+            $resultado = $cliente->crear();
+
+            if ($resultado['resultado'] == 1) {
                 echo json_encode([
                     'mensaje' => 'Registro guardado correctamente',
                     'codigo' => 1
                 ]);
-            }else{
+            } else {
                 echo json_encode([
                     'mensaje' => 'Ocurrió un error',
                     'codigo' => 0
@@ -35,17 +38,19 @@ class ProductoController {
             ]);
         }
     }
-    public static function modificarAPI(){
-        try {
-            $producto = new Producto($_POST);
-            $resultado = $producto->actualizar();
 
-            if($resultado['resultado'] == 1){
+    public static function modificarAPI()
+    {
+        try {
+            $cliente = new Cliente($_POST);
+            $resultado = $cliente->actualizar();
+
+            if ($resultado['resultado'] == 1) {
                 echo json_encode([
                     'mensaje' => 'Registro modificado correctamente',
                     'codigo' => 1
                 ]);
-            }else{
+            } else {
                 echo json_encode([
                     'mensaje' => 'Ocurrió un error',
                     'codigo' => 0
@@ -61,30 +66,26 @@ class ProductoController {
         }
     }
 
-
-
-    public static function eliminarAPI(){
-           
+    public static function eliminarAPI()
+    {
         try {
-            $producto_id = $_POST['producto_id'];
-            $producto = Producto::find($producto_id);
+            $cliente_id = $_POST['cliente_id'];
+            $cliente = Cliente::find($cliente_id);
+            $cliente->cliente_situacion = 0;
+            $resultado = $cliente->actualizar();
 
-            $producto->producto_situacion = 0;
-            $resultado = $producto->actualizar();
-    
-            if ($resultado['resultado'] == 1 ){
+            if ($resultado['resultado'] == 1) {
                 echo json_encode([
-                    'mensaje' => 'Eliminado correctamente',
+                    'mensaje' => 'Registro eliminado correctamente',
                     'codigo' => 1
                 ]);
-    
-            }else{
+            } else {
                 echo json_encode([
-                    'mensaje' => 'Ocurrió un error al eliminar el registro',
+                    'mensaje' => 'Ocurrió un error',
                     'codigo' => 0
                 ]);
             }
-            
+            // echo json_encode($resultado);
         } catch (Exception $e) {
             echo json_encode([
                 'detalle' => $e->getMessage(),
@@ -92,25 +93,28 @@ class ProductoController {
                 'codigo' => 0
             ]);
         }
+    }
     
-}
-    public static function buscarAPI(){
-        // $productos = Producto::all();
-        $producto_nombre = $_GET['producto_nombre'];
-        $producto_precio = $_GET['producto_precio'];
+    public static function buscarAPI()
+    {
+        $cliente_nombre = $_GET['cliente_nombre'] ?? '';
+        $cliente_nit = $_GET['cliente_nit'] ?? '';
 
-        $sql = "SELECT * FROM productos where producto_situacion = 1 ";
-        if($producto_nombre != '') {
-            $sql.= " and producto_nombre like '%$producto_nombre%' ";
+        $sql = "SELECT * FROM clientes WHERE cliente_situacion = 1 ";
+        if ($cliente_nombre != '') {
+            $cliente_nombre = strtolower($cliente_nombre);
+            $sql .= " AND LOWER(cliente_nombre) LIKE '%$cliente_nombre%' ";
         }
-        if($producto_precio != '') {
-            $sql.= " and producto_precio = $producto_precio ";
+        if ($cliente_nit != '') {
+            $cliente_nit = strtolower($cliente_nit);
+            $sql .= " AND cliente_nit= '$cliente_nit' ";
         }
+
         try {
-            
-            $productos = Producto::fetchArray($sql);
-    
-            echo json_encode($productos);
+
+            $clientes = Cliente::fetchArray($sql);
+
+            echo json_encode($clientes);
         } catch (Exception $e) {
             echo json_encode([
                 'detalle' => $e->getMessage(),

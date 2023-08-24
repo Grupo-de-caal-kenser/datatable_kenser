@@ -4,9 +4,9 @@ require_once __DIR__ . '/../includes/app.php';
 
 use MVC\Router;
 use Controllers\AppController;
-use Controllers\DetalleController;
 use Controllers\LoginController;
 use Controllers\ProductoController;
+use Controllers\ClienteController;
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -19,6 +19,12 @@ $router->get('/productos/datatable', [ProductoController::class,'datatable']);
 $router->get('/API/productos/buscar', [ProductoController::class,'buscarAPI']);
 $router->get('/productos/estadistica', [DetalleController::class,'estadistica']);
 $router->get('/API/productos/estadistica', [DetalleController::class,'detalleVentasAPI']);
+
+$router->get('/clientes/datatable', [ClienteController::class,'datatable']);
+$router->post('/API/clientes/guardar', [ClienteController::class,'guardarAPI'] );
+$router->post('/API/clientes/modificar', [ClienteController::class,'modificarAPI'] );
+$router->post('/API/clientes/eliminar', [ClienteController::class,'eliminarAPI'] );
+$router->get('/API/clientes/buscar', [ClienteController::class,'buscarAPI'] );
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();
