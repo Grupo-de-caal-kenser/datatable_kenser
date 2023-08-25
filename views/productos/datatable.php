@@ -16,6 +16,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/datatable_kenser/clientes/datatable">Clientes</a>
+          </li>       
+          <li class="nav-item">
+            <a class="nav-link" href="/datatable_kenser/clientes/estadistica">Estadísticas</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">

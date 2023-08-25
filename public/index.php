@@ -27,6 +27,10 @@ $router->post('/API/productos/eliminar', [ProductoController::class,'eliminarAPI
 
 $router->get('/clientes/datatable', [ClienteController::class,'datatable']);
 $router->post('/API/clientes/guardar', [ClienteController::class,'guardarAPI'] );
+
+$router->get('/clientes/estadistica2', [DetalleController::class,'estadistica2']);
+$router->get('/API/clientes/estadistica2', [DetalleController::class,'detalleClientesAPI']);
+
 $router->post('/API/clientes/modificar', [ClienteController::class,'modificarAPI'] );
 $router->post('/API/clientes/eliminar', [ClienteController::class,'eliminarAPI'] );
 $router->get('/API/clientes/buscar', [ClienteController::class,'buscarAPI'] );

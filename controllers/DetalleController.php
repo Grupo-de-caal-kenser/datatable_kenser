@@ -28,5 +28,35 @@ class DetalleController {
             ]);
         }
     }
+    public static function estadistica2(Router $router){
+        $router->render('clientes/estadistica2', []);
+    }
+
+    public static function detalleClientesAPI(){
+
+        $sql = "SELECT c.cliente_nombre, 
+        COUNT(DISTINCT dv.detalle_cantidad) AS total_ventas
+            FROM clientes c 
+            LEFT JOIN ventas v ON c.cliente_id = v.venta_cliente 
+            LEFT JOIN detalle_ventas dv ON v.venta_id = dv.detalle_venta 
+            WHERE c.cliente_situacion = '1' 
+            AND v.venta_situacion = '1' 
+            AND dv.detalle_situacion = '1' 
+            GROUP BY c.cliente_nombre 
+            ORDER BY total_ventas DESC;";
+                
+        try {
+            
+            $clientes = Detalle::fetchArray($sql);
+    
+            echo json_encode($clientes);
+        } catch (Exception $e) {
+            echo json_encode([
+                'detalle' => $e->getMessage(),
+                'mensaje' => 'Ocurrió un error',
+                'codigo' => 0
+            ]);
+        }
+    }
 
 }
