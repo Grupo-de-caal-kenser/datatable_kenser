@@ -9,7 +9,11 @@ use MVC\Router;
 class ClienteController
 {
     public static function datatable(Router $router){
+        if(isset($_SESSION['auth_user'])){
         $router->render('clientes/datatable', []);
+        }else{
+            header('Location: /datatable_kenser/');
+        }
     }
 
     public static function guardarAPI()

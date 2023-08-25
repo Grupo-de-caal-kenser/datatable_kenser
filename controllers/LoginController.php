@@ -23,6 +23,8 @@ class LoginController {
             header('Location: /datatable_kenser/');
         }
     }
+
+
     public static function loginAPI() {
         $catalogo = filter_var($_POST['usu_catalogo'], FILTER_SANITIZE_NUMBER_INT);
         $password = filter_var($_POST['usu_password'], FILTER_DEFAULT);
