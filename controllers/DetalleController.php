@@ -8,7 +8,11 @@ use MVC\Router;
 
 class DetalleController {
     public static function estadistica(Router $router){
-        $router->render('productos/estadistica', []);
+        if(isset($_SESSION['auth_user'])){
+            $router->render('productos/estadistica', []);
+            }else{
+                header('Location: /datatable_kenser/');
+            }
     }
 
     public static function detalleVentasAPI(){
@@ -29,7 +33,11 @@ class DetalleController {
         }
     }
     public static function estadistica2(Router $router){
-        $router->render('clientes/estadistica2', []);
+        if(isset($_SESSION['auth_user'])){
+            $router->render('clientes/estadistica2', []);
+            }else{
+                header('Location: /datatable_kenser/');
+            }
     }
 
     public static function detalleClientesAPI(){

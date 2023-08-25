@@ -26,7 +26,7 @@
       </div>
     </div>
   </nav>
-<h1>ESTADISTICAS DE VENTAS</h1>
+<h1>ESTADISTICAS DE CLIENTES</h1>
 <button id="btnActualizar" class="btn btn-info">Actualizar</button>
 <div class="row">
     <div class="col-lg-6">
