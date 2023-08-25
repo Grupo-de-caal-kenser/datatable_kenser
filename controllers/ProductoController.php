@@ -8,7 +8,11 @@ use MVC\Router;
 
 class ProductoController {
     public static function datatable(Router $router){
+        if(isset($_SESSION['auth_user'])){
         $router->render('productos/datatable', []);
+        }else{
+            header('Location: /datatable_kenser/');
+        }
     }
     public static function guardarAPI(){
         try {
@@ -99,13 +103,16 @@ class ProductoController {
         $producto_nombre = $_GET['producto_nombre'];
         $producto_precio = $_GET['producto_precio'];
 
-        $sql = "SELECT * FROM productos where producto_situacion = 1 ";
-        if($producto_nombre != '') {
-            $sql.= " and producto_nombre like '%$producto_nombre%' ";
+        $sql = "SELECT * FROM productos WHERE producto_situacion = 1 ";
+        if ($producto_nombre != '') {
+            $producto_nombre = strtolower($producto_nombre);
+            $sql .= " AND LOWER(producto_nombre) LIKE '%$producto_nombre%' ";
         }
-        if($producto_precio != '') {
-            $sql.= " and producto_precio = $producto_precio ";
+        if ($producto_precio != '') {
+            $producto_precio = strtolower($producto_precio);
+            $sql .= " AND producto_precio= '$producto_precio' ";
         }
+
         try {
             
             $productos = Producto::fetchArray($sql);

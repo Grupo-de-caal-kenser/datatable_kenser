@@ -15,10 +15,14 @@ $router->get('/', [LoginController::class,'index']);
 $router->get('/menu', [LoginController::class,'menu']);
 $router->get('/logout', [LoginController::class,'logout']);
 $router->post('/API/login', [LoginController::class,'loginAPI']);
+
 $router->get('/productos/datatable', [ProductoController::class,'datatable']);
 $router->get('/API/productos/buscar', [ProductoController::class,'buscarAPI']);
 $router->get('/productos/estadistica', [DetalleController::class,'estadistica']);
 $router->get('/API/productos/estadistica', [DetalleController::class,'detalleVentasAPI']);
+$router->post('/API/productos/guardar', [ProductoController::class,'guardarAPI'] );
+$router->post('/API/productos/modificar', [ProductoController::class,'modificarAPI'] );
+$router->post('/API/productos/eliminar', [ProductoController::class,'eliminarAPI'] );
 
 $router->get('/clientes/datatable', [ClienteController::class,'datatable']);
 $router->post('/API/clientes/guardar', [ClienteController::class,'guardarAPI'] );
