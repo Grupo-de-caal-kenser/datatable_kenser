@@ -7,7 +7,7 @@ const context = canvas.getContext('2d');
 
 
 const chartClientes = new Chart(context, {
-    type : 'doughnut',
+    type : 'polarArea',
     data : {
         labels : [],
         datasets : [
