@@ -30,7 +30,17 @@ primary key (permiso_id),
 foreign key (permiso_rol) references rol (rol_id),
 foreign key (permiso_usuario) references usuario
 (usu_id)
-)
+);
+CREATE TABLE detalle_ventas (
+detalle_id SERIAL NOT NULL,
+detalle_venta INTEGER NOT NULL,
+detalle_producto INTEGER NOT NULL,
+detalle_cantidad SMALLINT NOT NULL,
+detalle_situacion CHAR(1) DEFAULT '1',
+PRIMARY KEY(detalle_id),
+FOREIGN KEY (detalle_venta) REFERENCES ventas(venta_id),
+FOREIGN KEY (detalle_producto) REFERENCES pproductos(producto_id)
+);
 insert into aplicacion (app_nombre) values ('TIENDA');
 
 insert into aplicacion (app_nombre) values ('TIENDA');

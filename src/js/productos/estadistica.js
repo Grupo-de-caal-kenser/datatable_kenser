@@ -16,21 +16,32 @@ const chartVentas = new Chart(context, {
                 data : [],
                 backgroundColor : []
             },
-            // {
-            //     type: 'bar',
-            //     label : 'Existencias',
-            //     data : [3,4,5,5],
-            //     backgroundColor : [
-            //         'rgb(123,45,26)',
-            //         'rgb(12,85,126)',
-            //         'rgb(12,85,126)',
-            //         'rgb(225,45,16)',
-            //     ]
-            // }
+            {
+                type: 'bar',
+                label : 'Productos',
+                data : [15,58,41,63],
+                backgroundColor : [
+                    'rgb(123,45,26)',
+                    'rgb(12,85,126)',
+                    'rgb(12,85,126)',
+                    'rgb(225,45,16)',
+                ]
+            },
+            {
+                type: 'bar',
+                label : 'Clientes',
+                data : [2,2,5,4],
+                backgroundColor : [
+                    'rgb(123,45,26)',
+                    'rgb(12,85,126)',
+                    'rgb(12,85,126)',
+                    'rgb(225,45,16)',
+                ]
+            }
         ]
     },
     options : {
-        indexAxis : 'y'
+        indexAxis : 'x'
     }
 })
 
